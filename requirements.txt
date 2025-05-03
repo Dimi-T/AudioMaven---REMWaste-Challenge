@@ -1,0 +1,9 @@
+torch
+torchaudio
+speechbrain
+pandas
+scikit-learn
+numpy
+soundfile
+requests
+moviepy
