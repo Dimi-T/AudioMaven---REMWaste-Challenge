@@ -13,6 +13,12 @@ sudo apt-get -y install python3-pip
 exec > /dev/tty
 echo Done!
 
+# Installing ffmpeg
+echo Installing ffmpeg...
+exec > /dev/null
+sudo apt-get -y install ffmpeg
+exec > /dev/tty
+echo Done!
 
 echo Installing Cuda...
 exec > /dev/null
