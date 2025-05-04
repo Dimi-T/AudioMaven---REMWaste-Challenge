@@ -22,7 +22,7 @@ You can:
 Navigate to the detector's source directory and run the script with your desired video URL:  
 ```bash
 cd Detector/src
-python main.py --url "your video url here"
+python main.py --url="your video url here"
 ```  
 This will:  
 - Download the video  
