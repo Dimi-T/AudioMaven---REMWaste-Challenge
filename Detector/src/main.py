@@ -1,7 +1,8 @@
 import torch
 import argparse
+from sklearn.preprocessing import LabelEncoder
 
-from predict import predict
+from predict import predict, accents
 from get_audio import extract_audio
 from audio_maven import AudioMaven
 
@@ -15,6 +16,11 @@ def main():
     parser.add_argument('--url', type=str, required=True, help='YouTube video URL')
     args = parser.parse_args()
 
+    
+    label_encoder = LabelEncoder()
+    label_encoder.fit(accents)
+
+
     print(f"Downloading and extracting audio from: {args.url}")
     audio_path = extract_audio(args.url)
 
@@ -22,9 +28,10 @@ def main():
     model = load_model()
 
     print("Predicting accent...")
-    predicted_accent = predict(audio_path, model)
+    predicted_accent, confidence = predict(audio_path, model, label_encoder)
 
     print(f"Predicted Accent: {predicted_accent}")
+    print(f"Confidence Score: {confidence:.2%}")
 
 
 if __name__ == "__main__":

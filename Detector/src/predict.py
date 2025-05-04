@@ -2,8 +2,6 @@ import torch
 import librosa
 import numpy as np
 import os
-from sklearn.preprocessing import LabelEncoder
-
 # Assuming the model and label_encoder are pre-loaded or passed to the function
 
 accents = ['spanish', 'english', 'arabic', 'russian', 'dutch', 'bengali',
@@ -12,10 +10,7 @@ accents = ['spanish', 'english', 'arabic', 'russian', 'dutch', 'bengali',
             ]
 mfcc = 13
 
-def predict(audio_path, model, sample_rate=22050, n_mfcc=mfcc):
-
-    label_encoder = LabelEncoder()
-    label_encoder.fit(accents)
+def predict(audio_path, model, label_encoder, sample_rate=22050, n_mfcc=mfcc):
 
     y, sr = librosa.load(audio_path, sr=sample_rate)
     
@@ -31,10 +26,15 @@ def predict(audio_path, model, sample_rate=22050, n_mfcc=mfcc):
     model.eval()
     with torch.no_grad():
         output = model(features_tensor)
-        _, predicted_class = torch.max(output, dim=1)
+        probabilities = torch.nn.functional.softmax(output, dim=1)
+        confidence, predicted_class = torch.max(probabilities, dim=1)
     
     predicted_class_label = label_encoder.inverse_transform(predicted_class.cpu().numpy())[0]
+    confidence_score = confidence.item()
 
-    os.remove(audio_path)
+    try:
+        os.remove(audio_path)
+    except Exception as e:
+        print(f"Warning: Could not delete audio file: {e}")
     
-    return predicted_class_label
+    return predicted_class_label, confidence_score

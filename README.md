@@ -22,7 +22,7 @@ You can:
 Navigate to the detector's source directory and run the script with your desired video URL:  
 ```bash
 cd Detector/src
-python main.py --url="your video url here"
+python main.py --url "your video url here"
 ```  
 This will:  
 - Download the video  
@@ -42,7 +42,7 @@ AudioMaven---REMWaste-Challenge/
 - Ubuntu 20.04  
 - Python 3.8+  
 - ffmpeg  
-- Python packages (installed via `setup.sh`): pytube, torch, torchaudio, librosa, scikit-learn, etc.  
+- Python packages
 
  
 © 2025 Dimitrie Tănăsescu
