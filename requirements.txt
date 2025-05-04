@@ -1,8 +1,6 @@
 torch
-pandas
 scikit-learn
 numpy
-requests
 moviepy
 yt-dlp
 librosa
