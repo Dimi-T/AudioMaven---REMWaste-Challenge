@@ -32,11 +32,12 @@ This will:
 ```
 AudioMaven---REMWaste-Challenge/
 ├── Detector/
+│   ├── models/
 │   └── src/
-├── Training/
-├── models/
-├── setup.sh
-└── README.md
+├── audiomaven.ipynb
+├── README.md
+├── requirements.txt
+└── setup.sh
 ```  
 ## 🧰 Requirements  
 - Ubuntu 20.04  
